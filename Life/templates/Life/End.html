@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Diese Runde ist beendet!
+{% endblock %}
+
+{% block content %}
+    <p>
+        Alle Teilnehmer haben diese Runde beendet.
+        Bitte klicken Sie nun auf "Weiter" um mit der nächsten Runde zu beginnen.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
