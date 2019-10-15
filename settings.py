@@ -67,7 +67,7 @@ SESSION_CONFIGS = \
         'display_name': "Next-of-kin",
         'num_demo_participants': 12,
         'app_sequence': ['Life'],
-        'use_browser_bots' : True,
+        'use_browser_bots' : False,
     },
     ]
 
