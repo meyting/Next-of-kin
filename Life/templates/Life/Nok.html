@@ -1,0 +1,15 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Page title
+{% endblock %}
+
+{% block content %}
+
+<div>
+    {% formfield player.nok_decision %}
+</div>
+    {% next_button %}
+
+{% endblock %}

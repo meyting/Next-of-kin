@@ -14,7 +14,7 @@ class Decision(Page):
             player.is_donor = self.player.is_donor
 
 
-class Allocation(WaitPage):
+class Individual(WaitPage):
     wait_for_all_groups = True
     def after_all_players_arrive(self):
         for p in self.subsession.get_players():
@@ -30,6 +30,21 @@ class Allocation(WaitPage):
             p.death_from_A()
             print('DEATH FROM A', p.is_dead, p.participant.id_in_session)
             p.organ_need()
+        for p in self.subsession.get_players():
+            p.nok_asked()
+
+class Nok(Page):
+    form_model = 'player'
+    form_fields = ['nok_decision']
+    def before_next_page(self):
+        self.player.make_nok_decision()
+
+    def is_displayed(self):
+        return self.player.asked == True
+
+class Allocate(WaitPage):
+    wait_for_all_groups = True
+    def after_all_players_arrive(self):
         self.subsession.collect_organs()
         print(self.subsession.available_organs_pre_alloc)
         self.subsession.count_how_many_need_organs()
@@ -48,11 +63,6 @@ class Allocation(WaitPage):
             return self.participant.vars['is_dead'] == False
 
 class Liferesults(Page):
-    form_model = 'player'
-    form_fields = ['nok_decision']
-    def vars_for_template(self):
-        self.player.nok_asked()
-        self.player.make_nok_decision()
     def is_displayed(self):
         return self.participant.vars['is_dead'] == False
 
@@ -90,8 +100,9 @@ class End(WaitPage):
 
 page_sequence = [
     Decision,
-#    Individual_health,
-    Allocation,
+    Individual,
+    Nok,
+    Allocate,
     Liferesults,
     End,
 #    Allocation,

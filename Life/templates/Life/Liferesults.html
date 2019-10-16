@@ -13,13 +13,10 @@ need -     {{ player.need_organ}}
 lived -     {{ player.periods_lived}}
 waited -     {{ player.periods_waiting}}
 got organ -     {{ player.got_organ}}
+asked -     {{ player.asked}}
+
 </p>
-<div>
-    {% if player.asked == True %}
-    {% formfield player.nok_decision %}
-    {% endif %}
-</div>
-{{ form.nok_decision.errors }}
+
     {% next_button %}
 
 {% endblock %}

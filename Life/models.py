@@ -184,7 +184,7 @@ class Player(BasePlayer):
 
     def nok_asked(self):
         groupmember = self.get_others_in_group()
-        asked = [True if g.in_round(self.round_number).is_dead == True else False for g in groupmember]
+        asked = [g.is_dead and g.periods_lived+1 == g.round_number for g in groupmember]
         self.asked = asked[0]
 
     def make_nok_decision(self):
@@ -195,4 +195,3 @@ class Player(BasePlayer):
                 for gm in g.in_rounds(self.round_number + 1, Constants.num_rounds):
                     gm.is_donor = self.nok_decision
                 g.participant.vars['is_donor'] = self.nok_decision
-                self.asked = False
