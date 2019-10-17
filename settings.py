@@ -63,11 +63,20 @@ SESSION_CONFIG_DEFAULTS = {
 SESSION_CONFIGS = \
     [
     {
-        'name': 'Organ_Donation_Game',
-        'display_name': "Next-of-kin",
+        'name': 'Organ_Donation_Game_Opt_Out',
+        'display_name': "Next-of-kin o-o",
         'num_demo_participants': 12,
         'app_sequence': ['Life'],
         'use_browser_bots' : False,
+        'treatment': 'opt-out'
+    },
+    {
+        'name': 'Organ_Donation_Game_Active_Choice',
+        'display_name': "Next-of-kin a-c",
+        'num_demo_participants': 12,
+        'app_sequence': ['Life'],
+        'use_browser_bots' : False,
+        'treatment': 'active-choice'
     },
     ]
 

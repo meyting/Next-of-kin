@@ -7,8 +7,18 @@
 
 {% block content %}
 
+<p> {% if treatment == "opt-out" %}
+    Sie sind Organspender.
+    {% endif %}
+    {% if treatment == "active-choice" %}
+    Sie haben bisher noch keine Entscheidung bzgl. der Verwendung Ihrer Organe nach Ihrem Tod getroffen.
+    {% endif %}
+    {{  treatment }}
+</p>
+...hier button falls man Entscheidung ändern/machen möchte, dann wird Frage eingeblendet...
+<div>
 {% formfield player.is_donor %}
-
+</div>
     {% next_button %}
 
 {% endblock %}

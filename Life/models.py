@@ -33,7 +33,15 @@ class Subsession(BaseSubsession):
         for p in self.get_players():
             if self.round_number == 1:
                 p.participant.vars['is_dead'] = False
-                p.participant.vars['is_donor'] = False
+                if 'treatment' in self.session.config:
+                    p.participant.vars['treatment'] = self.session.config['treatment']
+                    if p.participant.vars["treatment"] == "opt-out":
+                        p.is_donor = True
+                        p.participant.vars['is_donor'] = True
+                    if p.participant.vars["treatment"] == 'active-choice':
+                        p.is_donor = None
+                        p.participant.vars['is_donor'] = None
+                    p.treatment = p.participant.vars['treatment']
 
     available_organs_pre_alloc = models.IntegerField(initial=0)
     needed_organs_pre_alloc = models.IntegerField(initial=0)
@@ -91,32 +99,6 @@ class Subsession(BaseSubsession):
         #print("POST ALLOCATION", self.available_organs_post_alloc)
        # print("POST ALLOCATION", self.needed_organs_post_alloc)
 
-'''
-    def allocate_organs(self):
-        for k in range(0,Constants.l+1):        
-            for p in self.get_players():
-                if p.periods_waiting == 5-k:
-                    if p.need_organ == True and p.is_dead == False and self.needed_organs > self.available_organs > 0:
-                        lottery_tickets = ["no"] * self.needed_organs
-                        lottery_tickets[0:self.available_organs] = ["yes"] * self.available_organs
-                        ticket = np.random.choice(lottery_tickets, replace=False)
-                        if ticket == "yes":
-                            p.got_organ = True
-                            for player in p.in_rounds(p.round_number + 1, Constants.num_rounds):
-                                player.got_organ = True
-                            p.in_round(p.round_number + 1).need_organ = False
-                            p.periods_waiting = 0
-                            self.available_organs -= 1
-                            self.needed_organs -= 1
-                    if p.need_organ == True and p.is_dead == False and self.available_organs >= self.needed_organs > 0:
-                        p.got_organ = True
-                        for player in p.in_rounds(p.round_number + 1, Constants.num_rounds):
-                            player.got_organ = True
-                        p.in_round(p.round_number + 1).need_organ = False
-                        p.periods_waiting = 0
-                        self.available_organs -= 1
-                        self.needed_organs -= 1
-'''
 
 class Group(BaseGroup):
     pass
@@ -124,7 +106,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     payoff_period = models.FloatField(initial = 0)
     is_dead = models.BooleanField(initial=False)
-    is_donor = models.BooleanField(initial = False)
+    is_donor = models.BooleanField()
     need_organ = models.BooleanField(initial = False)
     periods_lived = models.IntegerField(initial = 0)
     periods_waiting = models.IntegerField(initial = 0)
@@ -133,6 +115,7 @@ class Player(BasePlayer):
     died_of_B = models.BooleanField()
     asked = models.BooleanField()
     nok_decision = models.BooleanField(blank = True)
+    treatment = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
 
 # Execute each period
     def death_from_A(self):

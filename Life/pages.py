@@ -5,12 +5,16 @@ from .models import Constants
 
 class Decision(Page):
     form_model = 'player'
-    form_fields = ['is_donor']
+    form_fields = ['is_donor', 'treatment']
+    def vars_for_template(self):
+        return {'treatment': str(self.participant.vars['treatment']),
+                }
+
     def is_displayed(self):
         return self.player.round_number == 1
 
     def before_next_page(self):
-        for player in self.player.in_rounds(self.round_number + 1, Constants.num_rounds):
+        for player in self.player.in_rounds(self.round_number, Constants.num_rounds):
             player.is_donor = self.player.is_donor
 
 
