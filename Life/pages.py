@@ -3,15 +3,31 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class Decision(Page):
+class Default(Page):
     form_model = 'player'
-    form_fields = ['is_donor', 'treatment']
+    form_fields = ['decide']
     def vars_for_template(self):
-        return {'treatment': str(self.participant.vars['treatment']),
-                }
+        return {'treatment': self.session.config['treatment'],}
+
 
     def is_displayed(self):
         return self.player.round_number == 1
+
+class Decision(Page):
+    form_model = 'player'
+    form_fields = ['is_donor']
+    def vars_for_template(self):
+        return {'treatment': self.session.config['treatment'],
+                'image_path1': 'img/yes.PNG',
+                'image_path2': 'img/no.PNG',
+                'image1_optout': '<input name="is_donor" type="radio" id="yes" value="True" checked=checked/>',
+                'image2_optout': '<input name="is_donor" type="radio" id="no" value="False"/>',
+                'image1_activechoice': '<input name="is_donor" type="radio" id="yes" value="True"/>',
+                'image2_activechoice': '<input name="is_donor" type="radio" id="no" value="False"/>',
+                }
+
+    def is_displayed(self):
+        return self.player.round_number == 1 and self.player.decide == True
 
     def before_next_page(self):
         for player in self.player.in_rounds(self.round_number, Constants.num_rounds):
@@ -103,6 +119,7 @@ class End(WaitPage):
         return self.player.round_number == Constants.num_rounds
 
 page_sequence = [
+    Default,
     Decision,
     Individual,
     Nok,

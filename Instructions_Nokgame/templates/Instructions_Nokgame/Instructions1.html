@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Herzlich Willkommen
+{% endblock %}
+
+{% block content %}
+
+<p>
+    In diesem Experiment simulieren wir einen hypothetische Organspendeentscheidung.
+    Sie werden in einer Gruppe, bestehend aus insgesamt 12 Teilnehmern, ein Spiel spielen.
+    Dieses Spiel werden Sie insgesamt {{ Constants.gamerounds }} mal spielen, immer in der gleichen Gruppe.
+    Ihre Ausgangssituation des Spiels ändert sich nach den ersten {{ Constants.gamerounds_part }} Durchgängen - darüber werden Sie dann noch einmal informiert.
+</p>
+<p>
+    Für Ihre Bezahlung werden insgesamt {{ Constants.number_payout_gamerounds }} Durchgänge zufällig ausgewählt.
+    Dabei haben Sie keine Möglichkeit zu beeinflussen, welche Runde gewählt wird.
+    Sie erhalten am Ende des Experiments die Summe Ihrer Gewinne aus den {{ Constants.number_payout_gamerounds }} zufällig ausgewählten Durchgängen, sowie eine fixe Teilnahmeprämie von {{ session.config.participation_fee }}.
+    Der Gewinn wird Ihnen am Ende der heutigen Session in bar ausgezahlt.
+</p>
+<p>
+    Bitte klicken Sie auf "Weiter" um zu den Erklärungen des Spiels zu gelangen.
+</p>
+
+    {% next_button %}
+
+{% endblock %}

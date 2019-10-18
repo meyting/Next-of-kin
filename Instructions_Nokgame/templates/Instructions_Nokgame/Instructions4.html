@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Das Spiel - Ihre Entscheidung
+{% endblock %}
+
+{% block content %}
+<p>
+    Nachdem Ihr A Organ ausgefallen ist, besteht die Möglichkeit, dass Ihre B Organe anderen Teilnehmern der Gruppe gegeben werden.
+    In diesem Fall wird nach dem Ausfall Ihres A Organs jedes Ihrer funktionierenden B Organe an einen anderen Teilnehmer mit ausgefallenen B Organen gehen, falls dieser andere Teilnehmer bis dahin 5 oder weniger Perioden auf ein B Organ gewartet hat.
+    Falls mehr als zwei andere Teilnehmer auf ein B Organ warten, erhält zunächst der Teilnehmer mit der längsten Wartezeit ein B Organ.
+    Bis zu zwei andere Teilnehmer können jeweils eines Ihrer B Organe erhalten.
+    Sobald ein B Organ einmal gespendet wurde, kann es nicht erneut gespendet werden.
+</p>
+{% if treatment == 'opt-out' %}
+<p>
+    Zu Beginn jedes Durchgangs werden Sie zunächst als "Organspender" geführt.
+    Sie können dies aber zu Beginn eines Durchgangs ändern.
+    Dazu müssen Sie auf den zu Anfang eingeblendeten Button "Zur Organspende-Entscheidung" klicken.
+    Falls Sie auf diesen Button klicken werden Ihnen {{ Constants.thinking_cost }} Cent von Ihrem Ausgangsbudget von {{ Constants.startbudget_opt_out }} Euro abgezogen.
+    Auf der dann folgenden Seite, können Sie Ihren Status von "Organspender" zu "Kein Organspender" ändern.
+    Falls Sie dann Ihren Status in "Kein Organspender" ändern, erhalten Sie {{ Constants.registration_cost }} Cent.
+    Ihre Entscheidung wird nur für Ihren "Partner" (siehe nächste Seite) sichtbar sein - alle anderen Teilnehmer kennen Ihre Entscheidung nicht.
+</p>
+
+{% endif %}
+{% if treatment == 'active-choice' %}
+<p>
+    Zu Beginn jedes Durchgangs werden Sie weder als "Organspender", noch als "kein Organspender" geführt.
+    Sie können dies aber zu Beginn eines Durchgangs ändern.
+    Dazu müssen Sie auf den zu Anfang eingeblendeten Button "Zur Organspende-Entscheidung" klicken.
+    Falls Sie auf diesen Button klicken werden Ihnen {{ Constants.thinking_cost }} Cent von Ihrem Ausgangsbudget von {{ Constants.startbudget_active_choice }} Euro abgezogen.
+    Auf der dann folgenden Seite, können Sie Ihren Status entweder in "Organspender" oder in "Kein Organspender" ändern.
+    Falls Sie sich als Organspender registrieren, werden Ihnen weitere {{ Constants.registration_cost }} Cent von Ihrem Ausgangsbudget von {{ Constants.startbudget_active_choice }} Euro abgezogen.
+    Ihre Entscheidung wird nur für Ihren "Partner" (siehe nächste Seite) sichtbar sein - alle anderen Teilnehmer kennen Ihre Entscheidung nicht.
+    Sie haben aber auch die Möglichkeit, Ihre Entscheidung offen zu lassen.
+    In diesem Fall wird "Ihr/e Partner/in" (siehe nächste Seite) für Sie entscheiden, nachdem Ihr A Organ ausgefallen ist.
+    Sie können diese Entscheidung dann nicht beobachten.
+</p>
+{% endif %}
+    {% next_button %}
+
+{% endblock %}

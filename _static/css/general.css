@@ -1,0 +1,12 @@
+.initiallyHidden {
+  visibility: hidden;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+output {
+  color: white
+}

@@ -1,0 +1,54 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Ausgangssituation
+{% endblock %}
+
+{% block styles %}
+<style>
+.right{
+    margin-left:200px;
+    }
+
+.left{
+    margin-left:50px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<p> {% if treatment == "opt-out" %}
+    Sie werden momentan als "Organspender/in" geführt.
+    Wenn Sie nun eine eigene Entscheidung bzgl. der Verwendung Ihrer B Organe nach dem Ausfall Ihres A Organs treffen wollen, klicken Sie bitte auf "Zur Organspende-Entscheidung".
+    Dies kostet Sie {{ Constants.thinking_cost }} Cent.
+</p>
+<p>
+    Wenn Sie keine Entscheidung treffen wollen, klicken Sie bitte auf "Ohne Entscheidung fortfahren".
+    In diesem Fall gelten Sie zunächste weiter als "Organspender/in".
+    Nach dem Ausfall Ihres A Organs wird dann Ihr/e Partner/in befragt, ob er/sie der Spende Ihrer B Organe zustimmt.
+    Sollte das A Organ Ihres/Ihrer Partners/in bereits in einer der vorherigen Perioden ausgefallen sein und er/sie somit keine Entscheidung mehr treffen kann, werden Ihre B Organe gespendet.
+</p>
+    {% endif %}
+    {% if treatment == "active-choice" %}
+<p>
+    Sie haben bisher noch keine Entscheidung bzgl. der Verwendung Ihrer Organe nach Ihrem Tod getroffen.
+    Wenn Sie nun eine eigene Entscheidung bzgl. der Verwendung Ihrer B Organe nach dem Ausfall Ihres A Organs treffen wollen, klicken Sie bitte auf "Zur Organspende-Entscheidung".
+    Dies kostet Sie {{ Constants.thinking_cost }} Cent.
+</p>
+<p>
+    Wenn Sie keine Entscheidung treffen wollen, klicken Sie bitte auf "Ohne Entscheidung fortfahren".
+    In diesem Fall wird nach dem Ausfall Ihres A Organs Ihr/e Partner/in befragt, ob Ihre B Organe gespendet werden sollen.
+    Sollte das A Organ Ihres/Ihrer Partners/in bereits in einer der vorherigen Perioden ausgefallen sein und er/sie somit keine Entscheidung mehr treffen kann, werden Ihre B Organe nicht gespendet.
+</p>
+    {% endif %}
+<br />
+<br />
+<div class="buttons" id="buttons">
+    <button  class="left otree-btn-next btn btn-primary next-button otree-next-button" name="decide" value="True" >Zur Organspende-Entscheidung</button>
+    <button  class="right otree-btn-next btn btn-primary next-button otree-next-button" name="decide" value="False" >Ohne Entscheidung fortfahren</button>
+    {{ form.decide.errors }}
+</div>
+
+    {% endblock %}

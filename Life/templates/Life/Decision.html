@@ -2,23 +2,119 @@
 {% load otree static %}
 
 {% block title %}
-    Page title
+Organspende-Entscheidung
+{% endblock %}
+
+{% block styles %}
+<style>
+.right{
+    margin-left:200px;
+    }
+
+.left{
+    margin-left:50px;
+    }
+
+#content{
+  width:100%;
+  heigth:500px;
+  margin 0 10% 0 10%;
+}
+
+.compare{
+  float:left;
+  width:45%;
+  margin-left:2.5%;
+  margin-right:2.5%;
+}
+
+.pictures{
+  max-width:100%;
+  heigth:auto;
+}
+
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:20px solid transparent;
+}
+label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:8px solid #000;
+}
+
+div.count {
+    margin-top: 350px;
+}
+.nextbutton {
+    text-align: center;
+    margin-top: 500px;
+}
+
+</style>
 {% endblock %}
 
 {% block content %}
 
-<p> {% if treatment == "opt-out" %}
-    Sie sind Organspender.
+{% if treatment == "opt-out" %}
+<p>
+    Sie haben nun die Gelegenheit Ihren Organspendestatus zu ändern.
+    Sollten Sie keine Änderung vornehmen, gelten Sie weiterhin als "Organspender/in".
+    Nach dem Ausfall Ihres A Organs wird dann Ihr/e Partner/in befragt, ob er/sie der Spende Ihrer B Organe zustimmt.
+    Sollte das A Organ Ihres/Ihrer Partners/in bereits in einer der vorherigen Perioden ausgefallen sein und er/sie somit keine Entscheidung mehr treffen kann, werden Ihre B Organe gespendet.
+    Falls Sie sich dazu entscheiden Organspender/in zu bleiben, kostet Sie das {{Constants.registration_cost}} Cent.
+</p>
+
+
+<div id="content">
+<div class="compare">
+<label for="yes">
+  {{image1_optout | safe}}
+  <img class="pictures" src="{% static image_path1 %}">
+</label>
+</div>
+
+<div class="compare">
+<label for="no">
+  {{image2_optout | safe}}
+  <img class="pictures" src="{% static image_path2 %}">
+</label>
+</div>
+</div>
     {% endif %}
     {% if treatment == "active-choice" %}
-    Sie haben bisher noch keine Entscheidung bzgl. der Verwendung Ihrer Organe nach Ihrem Tod getroffen.
-    {% endif %}
-    {{  treatment }}
+<p>
+    Sie haben nun die Gelegenheit Ihren Organspendestatus zu ändern.
+    Sollten Sie keine Änderung vornehmen, bleibt Ihr Status weiterhin unbekanntt .
+    Nach dem Ausfall Ihres A Organs wird dann Ihr/e Partner/in befragt, ob Ihre B Organe gespendet werden sollen.
+    Sollte das A Organ Ihres/Ihrer Partners/in bereits in einer der vorherigen Perioden ausgefallen sein und er/sie somit keine Entscheidung mehr treffen kann, werden Ihre B Organe nicht gespendet.
+    Falls Sie sich dazu entscheiden Organspender/in zu werden, kostet Sie das {{Constants.registration_cost}} Cent.
 </p>
-...hier button falls man Entscheidung ändern/machen möchte, dann wird Frage eingeblendet...
-<div>
-{% formfield player.is_donor %}
+<div id="content">
+<div class="compare">
+<label for="yes">
+  {{image1_activechoice | safe}}
+  <img class="pictures" src="{% static image_path1 %}">
+</label>
 </div>
-    {% next_button %}
 
-{% endblock %}
+<div class="compare">
+<label for="no">
+  {{image2_activechoice | safe}}
+  <img class="pictures" src="{% static image_path2 %}">
+</label>
+</div>
+</div>
+    {% endif %}
+<div class="nextbutton">
+    {% next_button %}
+</div>
+
+    {% endblock %}
+
+<!--
+<input type="hidden" name="offer_1" value="{{snack1}}" id="offer_1"/>
+<input type="hidden" name="offer_2" value="{{snack2}}" id="offer_2"/>
+-->

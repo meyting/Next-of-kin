@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Das Spiel - Ihr/e Partner/in
+{% endblock %}
+
+{% block content %}
+<p>
+Zu Beginn des ersten Durchgangs werden Sie mit einem anderen Teilnehmer gematcht.
+Sie bilden dann für alle folgenden Durchgänge eine "Partnerschaft".
+Ihr/e Partner/in  hat folgende Aufgabe:
+</p>
+{% if treatment == 'opt-out' %}
+<p>
+    Wenn Sie Ihren Status als Organspender zu Beginn eines Durchgangs nicht geändert haben, wird  Ihr/e Partner/in nach dem Ausfall Ihres A Organs befragt, ob Ihre B Organe zur Spende freigegeben werden sollen.
+    Nur wenn Ihr/e Partner/in zustimmt, kommen Ihre B Organe als "Spenderorgane" infrage.
+    Die Zustimmung kostet Ihrem/Ihrer Partner/in {{ Constants.nok_yes }} Cent.
+    Wenn Sie Ihren Status als Organspender zu Beginn eines Durchgangs in "Kein Organspender" geändert haben, wird Ihr/e Partner/in nach dem Ausfall Ihres A Organs nicht befragt.
+    Ihre B Organe kommen dann nicht als "Spenderorgane" infrage.
+    Sollte das A Organ Ihres/Ihrer Partners/in bereits in einer der vorherigen Perioden ausgefallen sein und er/sie somit keine Entscheidung mehr treffen kann, werden Ihre B Organe gespendet.
+</p>
+{% endif %}
+{% if treatment == 'active-choice' %}
+<p>
+    Wenn Sie zu Beginn eines Durchgangs keine Entscheidung für oder gegen einer Spende Ihrer B Organe nach dem Ausfall Ihres A Organ getroffen haben, wird Ihr/e Partner/in nach dem Ausfall Ihres A Organs befragt, ob Ihre B Organe zur Spende freigegeben werden sollen.
+    Nur wenn Ihr/e Partner/in zustimmt, kommen Ihre B Organe als "Spenderorgane" infrage.
+    Die Zustimmung kostet Ihrem/Ihrer Partner/in {{ Constants.nok_yes }} Cent.
+    Wenn Sie zu Beginn eines Durchgangs eine eigene Entscheidung getroffen haben, wird Ihr/e Partner/in nach dem Ausfall Ihres A Organs nicht befragt.
+    Ihre B Organe kommen dann nicht als "Spenderorgane" infrage.
+    Sollte das A Organ Ihres/Ihrer Partners/in bereits in einer der vorherigen Perioden ausgefallen sein und er/sie somit keine Entscheidung mehr treffen kann, werden Ihre B Organe nicht gespendet.
+</p>
+{% endif %}
+    {% next_button %}
+
+{% endblock %}

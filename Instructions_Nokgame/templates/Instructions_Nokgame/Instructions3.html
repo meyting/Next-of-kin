@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Das Spiel - Ablauf
+{% endblock %}
+
+{% block content %}
+
+<p>
+    In jeder Periode besteht eine 10% Wahrscheinlichkeit, dass Ihr A Organ ausfällt.
+    Wenn Ihr A Organ ausfällt, verlieren Sie 1 Euro und können kein weiteres Geld in dem jeweiligen Durchgang verdienen.
+
+</p>
+<p>
+    In jeder Periode besteht außerdem eine 20% Wahrscheinlichkeit, dass Ihre B Organe ausfallen (ihre B Organe fallen zusammen aus).
+    Wenn Ihr A Organ dann noch funktioniert, können Sie noch 5 Perioden ohne funktionierendes B Organ "überleben".
+    Während dieser Perioden verdienen Sie allerdings kein Geld.
+    Wenn Sie in einer dieser 5 Perioden ein B Organ eines anderen Teilnehmers bekommen, können Sie wieder beginnen Geld zu verdienen.
+    Wenn Sie in diesen 5 Perioden kein B Organ eines anderen Teilnehmers bekommen, fällt Ihr A Organ nach Ablauf der 5 Perioden aus.
+    Wieder gilt: Wenn Ihr A Organ ausfällt, verlieren Sie 1 Euro und können kein weiteres Geld in dem jeweiligen Durchgang verdienen.
+</p>
+<p>
+    Wenn keiner der 12 Teilnehmer Ihrer Gruppe mehr Geld verdienen kann, endet der jeweilige Durchgang.
+</p>
+
+{% next_button %}
+
+{% endblock %}

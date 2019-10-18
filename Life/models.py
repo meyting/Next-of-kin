@@ -22,6 +22,11 @@ class Constants(BaseConstants):
     p = 1
     l = 5
     r = 0.6
+    startbudget_opt_out = 1.50
+    startbudget_active_choice = 2
+    thinking_cost = 50
+    registration_cost = 50
+    nok_yes = 30
 
 class Subsession(BaseSubsession):
     def creating_session(self):
@@ -33,15 +38,13 @@ class Subsession(BaseSubsession):
         for p in self.get_players():
             if self.round_number == 1:
                 p.participant.vars['is_dead'] = False
-                if 'treatment' in self.session.config:
-                    p.participant.vars['treatment'] = self.session.config['treatment']
-                    if p.participant.vars["treatment"] == "opt-out":
-                        p.is_donor = True
-                        p.participant.vars['is_donor'] = True
-                    if p.participant.vars["treatment"] == 'active-choice':
-                        p.is_donor = None
-                        p.participant.vars['is_donor'] = None
-                    p.treatment = p.participant.vars['treatment']
+                if 'treatment' == 'opt-out' in self.session.config:
+                    p.is_donor = True
+                    p.participant.vars['is_donor'] = True
+                if 'treatment' == 'active-choice' in self.session.config:
+                    p.is_donor = None
+                    p.participant.vars['is_donor'] = None
+                p.treatment = self.session.config['treatment']
 
     available_organs_pre_alloc = models.IntegerField(initial=0)
     needed_organs_pre_alloc = models.IntegerField(initial=0)
@@ -106,7 +109,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     payoff_period = models.FloatField(initial = 0)
     is_dead = models.BooleanField(initial=False)
-    is_donor = models.BooleanField()
+    is_donor = models.BooleanField(choices=[[True, 'Organspender'], [False, 'Kein Organspender']])
     need_organ = models.BooleanField(initial = False)
     periods_lived = models.IntegerField(initial = 0)
     periods_waiting = models.IntegerField(initial = 0)
@@ -116,6 +119,7 @@ class Player(BasePlayer):
     asked = models.BooleanField()
     nok_decision = models.BooleanField(blank = True)
     treatment = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    decide = models.BooleanField(blank = True)
 
 # Execute each period
     def death_from_A(self):
@@ -167,8 +171,12 @@ class Player(BasePlayer):
 
     def nok_asked(self):
         groupmember = self.get_others_in_group()
-        asked = [g.is_dead and g.periods_lived+1 == g.round_number for g in groupmember]
-        self.asked = asked[0]
+        if self.session.config['treatment'] == 'opt-out':
+            asked = [g.is_dead and g.periods_lived+1 == g.round_number and g.is_donor == True for g in groupmember]
+            self.asked = asked[0]
+        if self.session.config['treatment'] == 'active-choice':
+            asked = [g.is_dead and g.periods_lived+1 == g.round_number and g.is_donor == None for g in groupmember]
+            self.asked = asked[0]
 
     def make_nok_decision(self):
         groupmember = self.get_others_in_group()

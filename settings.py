@@ -66,17 +66,19 @@ SESSION_CONFIGS = \
         'name': 'Organ_Donation_Game_Opt_Out',
         'display_name': "Next-of-kin o-o",
         'num_demo_participants': 12,
-        'app_sequence': ['Life'],
+        'app_sequence': ['Instructions_Nokgame','Life'],
         'use_browser_bots' : False,
-        'treatment': 'opt-out'
+        'treatment': 'opt-out',
+        'participation_fee': 5,
     },
     {
         'name': 'Organ_Donation_Game_Active_Choice',
         'display_name': "Next-of-kin a-c",
         'num_demo_participants': 12,
-        'app_sequence': ['Life'],
+        'app_sequence': ['Instructions_Nokgame','Life'],
         'use_browser_bots' : False,
-        'treatment': 'active-choice'
+        'treatment': 'active-choice',
+        'participation_fee': 5
     },
     ]
 

@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Das Spiel - Übersicht
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Sie spielen insgesamt {{ Constants.gamerounds }} Durchgänge des Spiels.
+    {% if treatment == 'opt-out' %}
+    Zu Beginn jedes Durchgangs, erhalten Sie ein Ausgangsbudget von {{ Constants.startbudget_opt_out }} Euro, sowie ein "Leben".
+    {% endif %}
+    {% if treatment == 'opt-out' %}
+    Zu Beginn jedes Durchgangs, erhalten Sie ein Ausgangsbudget von {{ Constants.startbudget_active_choice }} Euro, sowie ein "Leben".
+    {% endif %}
+    Ein Leben besteht aus <b>einem A Organ</b> und <b>zwei B Organen</b>.
+    Jeder Durchgang, besteht aus einer bestimmten Anzahl an Perioden, in denen Sie Geld verdienen können.
+    In jeder Periode, in der Sie ein funktionierendes A Organ und mindestens ein funktionierendes B Organ haben, bekommen Sie 1 Euro.
+</p>
+
+
+    {% next_button %}
+
+{% endblock %}
