@@ -7,7 +7,34 @@
 
 {% block content %}
     <p>
-        Die nächste Runde beginnt in Kürze. Bitte haben Sie einen Moment Geduld.
+    {% if player.is_dead == True %}
+    {% if player.periods_waiting != Constants.num_rounds  %}
+    Ihr A Organ ist ausgefallen.
+    Sie haben in dieser Periode 1 Euro verloren.
+    Dieser Durchgang ist für Sie beendet.<br /><br />
+    {% if player.round_number != Constants.num_rounds %}
+    Bitte klicken Sie nun auf "Weiter", um zum nächsten Durchgang zu gelangen.
+    {% endif %}
+    {% if player.round_number == Constants.num_rounds %}
+    Dies war der letzte Durchgang.<br /><br />
+    Bitte klicken Sie nun auf "Weiter", um Ihre Auszahlung berechnen zu lassen.
+    {% endif %}
+    {% endif %}
+
+    {% if player.periods_waiting == Constants.num_rounds  %}
+    Sie haben innerhalb von 5 Perioden kein B Organ erhalten.
+    Daher ist nun auch ihr A Organ ausgefallen.
+    Sie haben in dieser Periode 1 Euro verloren.
+    Diese Runde ist für Sie beendet.<br /><br />
+    {% if player.round_number != Constants.num_rounds %}
+    Bitte klicken Sie nun auf "Weiter", um zum nächsten Durchgang zu gelangen.
+    {% endif %}
+    {% if player.round_number == Constants.num_rounds %}
+    Dies war der letzte Durchgang. <br /><br />
+    Bitte klicken Sie nun auf "Weiter", um Ihre Auszahlung berechnen zu lassen.
+    {% endif %}
+    {% endif %}
+    {% endif %}
     </p>
 
     {% next_button %}

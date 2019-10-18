@@ -142,7 +142,7 @@ class Player(BasePlayer):
                 player.is_dead = True
             self.died_of_B = True
             self.need_organ = False
-            self.periods_waiting = Constants.num_rounds+1
+            self.periods_waiting = Constants.num_rounds
             self.payoff_period -= 1
 
 

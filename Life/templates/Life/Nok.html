@@ -2,14 +2,113 @@
 {% load otree static %}
 
 {% block title %}
-    Page title
+Entscheidung für Ihre/n Partner/in
+{% endblock %}
+
+{% block styles %}
+<style>
+.right{
+    margin-left:200px;
+    }
+
+.left{
+    margin-left:50px;
+    }
+
+#content{
+  width:100%;
+  heigth:500px;
+  margin 0 10% 0 10%;
+}
+
+.compare{
+  float:left;
+  width:45%;
+  margin-left:2.5%;
+  margin-right:2.5%;
+}
+
+.pictures{
+  max-width:100%;
+  heigth:auto;
+}
+
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:20px solid transparent;
+}
+label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:8px solid #000;
+}
+
+div.count {
+    margin-top: 350px;
+}
+.nextbutton {
+    text-align: center;
+    margin-top: 500px;
+}
+
+</style>
 {% endblock %}
 
 {% block content %}
 
-<div>
-    {% formfield player.nok_decision %}
-</div>
-    {% next_button %}
+{% if other == "True" %}
+<p>
+    Das A Organ Ihres/r Partner/in ist ausgefallen.
+    Ihr/e Partner/in ist momentan als Organspender/in registriert.
+    Sie haben nun die Gelegenheit diese Entscheidung zu ändern.
+    Stimmen Sie zu, dass die B Organe von Ihrem/Ihrer Partner/in anderen Teilnehmern, die in dieser Periode ein B Organ benötigen, gegeben werden?
+</p>
 
-{% endblock %}
+
+<div id="content">
+<div class="compare">
+<label for="yes">
+  {{nokyes_optout | safe}}
+  <img class="pictures" src="{% static image_path1 %}">
+</label>
+</div>
+
+<div class="compare">
+<label for="no">
+  {{nokno_optout | safe}}
+  <img class="pictures" src="{% static image_path2 %}">
+</label>
+</div>
+</div>
+    {% endif %}
+    {% if other == "None" %}
+<p>
+    <p>
+    Das A Organ Ihres/r Partner/in ist ausgefallen.
+    Ihr/e Partner/in hat bisher noch keine Entscheidung über eine mögliche Weiterverwendung ihrer/seiner B Organe getroffen.
+    Sie haben nun die Gelegenheit diese Entscheidung für ihn/sie zu treffen.
+    Sollen die B Organe von Ihrem/Ihrer Partner/in anderen Teilnehmern, die in dieser Periode ein B Organ benötigen, gegeben werden?
+</p>
+<div id="content">
+<div class="compare">
+<label for="yes">
+  {{nokyes_activechoice | safe}}
+  <img class="pictures" src="{% static image_path1 %}">
+</label>
+</div>
+
+<div class="compare">
+<label for="no">
+  {{nokno_activechoice | safe}}
+  <img class="pictures" src="{% static image_path2 %}">
+</label>
+</div>
+</div>
+    {% endif %}
+<div class="nextbutton">
+    {% next_button %}
+</div>
+
+    {% endblock %}

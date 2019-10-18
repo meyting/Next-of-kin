@@ -9,6 +9,11 @@ class Default(Page):
     def vars_for_template(self):
         return {'treatment': self.session.config['treatment'],}
 
+    def before_next_page(self):
+        if self.session.config['treatment'] == 'opt-out':
+            if self.player.decide == False:
+                for player in self.player.in_rounds(self.round_number, Constants.num_rounds):
+                    player.is_donor = True
 
     def is_displayed(self):
         return self.player.round_number == 1
@@ -20,10 +25,10 @@ class Decision(Page):
         return {'treatment': self.session.config['treatment'],
                 'image_path1': 'img/yes.PNG',
                 'image_path2': 'img/no.PNG',
-                'image1_optout': '<input name="is_donor" type="radio" id="yes" value="True" checked=checked/>',
-                'image2_optout': '<input name="is_donor" type="radio" id="no" value="False"/>',
-                'image1_activechoice': '<input name="is_donor" type="radio" id="yes" value="True"/>',
-                'image2_activechoice': '<input name="is_donor" type="radio" id="no" value="False"/>',
+                'yes_optout': '<input name="is_donor" type="radio" id="yes" value="True" checked=checked/>',
+                'no_optout': '<input name="is_donor" type="radio" id="no" value="False"/>',
+                'yes_activechoice': '<input name="is_donor" type="radio" id="yes" value="True"/>',
+                'no_activechoice': '<input name="is_donor" type="radio" id="no" value="False"/>',
                 }
 
     def is_displayed(self):
@@ -32,6 +37,7 @@ class Decision(Page):
     def before_next_page(self):
         for player in self.player.in_rounds(self.round_number, Constants.num_rounds):
             player.is_donor = self.player.is_donor
+
 
 
 class Individual(WaitPage):
@@ -52,10 +58,22 @@ class Individual(WaitPage):
             p.organ_need()
         for p in self.subsession.get_players():
             p.nok_asked()
+    def is_displayed(self):
+        return self.participant.vars['is_dead'] == False
 
 class Nok(Page):
     form_model = 'player'
     form_fields = ['nok_decision']
+    def vars_for_template(self):
+        return {'treatment': self.session.config['treatment'],
+                'image_path1': 'img/nokyes.PNG',
+                'image_path2': 'img/nokno.PNG',
+                'nokyes_optout': '<input name="nok_decision" type="radio" id="yes" value="True" checked=checked/>',
+                'nokno_optout': '<input name="nok_decision" type="radio" id="no" value="False"/>',
+                'nokyes_activechoice': '<input name="nok_decision" type="radio" id="yes" value="True"/>',
+                'nokno_activechoice': '<input name="nok_decision" type="radio" id="no" value="False"/>',
+                }
+
     def before_next_page(self):
         self.player.make_nok_decision()
 
@@ -86,7 +104,10 @@ class Liferesults(Page):
     def is_displayed(self):
         return self.participant.vars['is_dead'] == False
 
-
+    def vars_for_template(self):
+        if self.player.round_number > 1:
+            return {'needed_organ_last_period': self.player.in_round(self.player.round_number-1).need_organ,
+                }
 
 '''
 class Post_allocation(WaitPage):

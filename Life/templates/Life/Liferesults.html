@@ -2,19 +2,39 @@
 {% load otree static %}
 
 {% block title %}
-    Page title
+Ergebnisse: Periode {{ player.round_number }}
 {% endblock %}
 
 {% block content %}
 <p>
-dead -     {{ player.is_dead}}
-donor -     {{ player.is_donor}}
-need -     {{ player.need_organ}}
-lived -     {{ player.periods_lived}}
-waited -     {{ player.periods_waiting}}
-got organ -     {{ player.got_organ}}
-asked -     {{ player.asked}}
+    {% if player.need_organ  == True %}
+    Ihr B Organ funktioniert nicht mehr.
+    Sie haben in dieser Periode 0 Euro verdient.
+    Sie sind auf der Warteliste für ein B Organ.
+    Sie warten seit {{ player.periods_waiting }} {% if player.periods_waiting == 1 %} Periode. {% else %} Perioden. {% endif %}
+    <br /> <br />
+    Bitte klicken Sie nun auf "Weiter" um zur nächsten Periode zu gelangen.
+    {% endif %}
+    {% if player.round_number > 1 %}
+    {% if needed_organ_last_period == True %}
+    {% if player.need_organ  == False %}
+    {% if player.got_organ  == True %}
+    Sie haben ein neues B Organ von einem anderen Teilnehmer erhalten.
+    Sie haben in dieser Periode 1 Euro verdient.
+    <br /> <br />
+    Bitte klicken Sie nun auf "Weiter" um zur nächsten Periode zu gelangen.
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% if player.need_organ  == False %}
+    {% if player.got_organ  == False %}
+    Ihr A Organ und Ihre B Organe funktionieren.
+    Sie haben in dieser Periode 1 Euro verdient. <br /> <br />
 
+    Bitte klicken Sie nun auf "Weiter" um zur nächsten Periode zu gelangen.
+    {% endif %}
+    {% endif %}
 </p>
 
     {% next_button %}

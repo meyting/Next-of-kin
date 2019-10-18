@@ -71,14 +71,14 @@ div.count {
 <div id="content">
 <div class="compare">
 <label for="yes">
-  {{image1_optout | safe}}
+  {{yes_optout | safe}}
   <img class="pictures" src="{% static image_path1 %}">
 </label>
 </div>
 
 <div class="compare">
 <label for="no">
-  {{image2_optout | safe}}
+  {{no_optout | safe}}
   <img class="pictures" src="{% static image_path2 %}">
 </label>
 </div>
@@ -87,7 +87,7 @@ div.count {
     {% if treatment == "active-choice" %}
 <p>
     Sie haben nun die Gelegenheit Ihren Organspendestatus zu ändern.
-    Sollten Sie keine Änderung vornehmen, bleibt Ihr Status weiterhin unbekanntt .
+    Sollten Sie keine Änderung vornehmen, bleibt Ihr Status weiterhin unbekannt.
     Nach dem Ausfall Ihres A Organs wird dann Ihr/e Partner/in befragt, ob Ihre B Organe gespendet werden sollen.
     Sollte das A Organ Ihres/Ihrer Partners/in bereits in einer der vorherigen Perioden ausgefallen sein und er/sie somit keine Entscheidung mehr treffen kann, werden Ihre B Organe nicht gespendet.
     Falls Sie sich dazu entscheiden Organspender/in zu werden, kostet Sie das {{Constants.registration_cost}} Cent.
@@ -95,14 +95,14 @@ div.count {
 <div id="content">
 <div class="compare">
 <label for="yes">
-  {{image1_activechoice | safe}}
+  {{yes_activechoice | safe}}
   <img class="pictures" src="{% static image_path1 %}">
 </label>
 </div>
 
 <div class="compare">
 <label for="no">
-  {{image2_activechoice | safe}}
+  {{no_activechoice | safe}}
   <img class="pictures" src="{% static image_path2 %}">
 </label>
 </div>
@@ -113,8 +113,3 @@ div.count {
 </div>
 
     {% endblock %}
-
-<!--
-<input type="hidden" name="offer_1" value="{{snack1}}" id="offer_1"/>
-<input type="hidden" name="offer_2" value="{{snack2}}" id="offer_2"/>
--->
