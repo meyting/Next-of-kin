@@ -79,7 +79,7 @@ class Nok(Page):
         self.player.make_nok_decision()
 
     def is_displayed(self):
-        return self.player.asked == True
+        return self.player.asked == True and self.participant.vars['is_dead'] == False
 
 class Allocate(WaitPage):
     wait_for_all_groups = True
