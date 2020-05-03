@@ -17,7 +17,7 @@ class PlayerBot(Bot):
             elif self.player.id_in_subsession in [10,11,12]:
                 yield pages.Decision, dict(is_donor= True)
         if self.participant.vars['is_dead'] == False and self.player.asked == True:
-            yield pages.Nok, dict(nok_decision = False)
+            yield pages.Nok, dict(nok_decision = True)
         if self.participant.vars['is_dead'] == False:
             yield pages.Liferesults
         if self.subsession.round_number in Constants.finish_rounds:

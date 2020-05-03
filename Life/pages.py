@@ -1,7 +1,7 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
-
+import math
 
 class Default(Page):
     form_model = 'player'
@@ -85,7 +85,7 @@ class Allocate(WaitPage):
     wait_for_all_groups = True
     def after_all_players_arrive(self):
         self.subsession.collect_organs()
-        print(self.subsession.available_organs_pre_alloc)
+        print('AVAILABLE ORGANS PRE ALLOCATION:',self.subsession.available_organs_pre_alloc)
         self.subsession.count_how_many_need_organs()
         self.subsession.allocate_organs()
         for p in self.subsession.get_players():
@@ -100,7 +100,10 @@ class Allocate(WaitPage):
             print('ISDEAD?', p.participant.vars['is_dead'], p.participant.id_in_session)
         self.subsession.count_deaths()
     def is_displayed(self):
-            return self.participant.vars['is_dead'] == False
+        if self.player.round_number not in Constants.start_rounds:
+            return self.player.in_round(self.player.round_number-1).is_dead == False
+        else:
+            return True
 
 class Liferesults(Page):
     def is_displayed(self):
@@ -109,11 +112,11 @@ class Liferesults(Page):
     def vars_for_template(self):
         if self.player.round_number not in Constants.start_rounds:
             return {'needed_organ_last_period': self.player.in_round(self.player.round_number-1).need_organ,
-                    'period': int(self.player.round_number - round(self.player.round_number / 20, 0) * 20)
+                    'period': int(self.player.round_number - math.floor(self.player.round_number/20)*20)
                 }
         else:
             return {'needed_organ_last_period': False,
-                    'period': int(self.player.round_number - round(self.player.round_number/20,0)*20)
+                    'period': int(self.player.round_number - math.floor(self.player.round_number/20)*20)
                 }
 
 '''
