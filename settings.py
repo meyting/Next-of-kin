@@ -67,7 +67,7 @@ SESSION_CONFIGS = \
         'display_name': "Next-of-kin o-o",
         'num_demo_participants': 12,
         'app_sequence': ['Instructions_Nokgame','Life'],
-        'use_browser_bots' : True,
+        'use_browser_bots' : False,
         'treatment': 'opt-out',
         'participation_fee': 5,
     },
@@ -76,7 +76,7 @@ SESSION_CONFIGS = \
         'display_name': "Next-of-kin a-c",
         'num_demo_participants': 12,
         'app_sequence': ['Instructions_Nokgame','Life'],
-        'use_browser_bots' : True,
+        'use_browser_bots' : False,
         'treatment': 'active-choice',
         'participation_fee': 5
     },
