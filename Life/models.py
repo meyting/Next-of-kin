@@ -16,7 +16,7 @@ Your app description
 
 class Constants(BaseConstants):
     name_in_url = 'Life'
-    players_per_group = 2
+    players_per_group = 12
     num_rounds = 80
     a = 0.1
     b = 0.2
@@ -40,6 +40,7 @@ class Subsession(BaseSubsession):
         else:
             self.group_like_round(1)
         print(self.get_group_matrix())
+        # HIER MÜSSTE MAN NACH JETZIGEN INSTRUKTIONS NEUE GRUPPEN NACH DER HÄLFTE DER DURCHGÄNGE ZIEHEN!!!
         for p in self.get_players():
             if self.round_number in Constants.start_rounds:
                 p.participant.vars['is_dead'] = False
