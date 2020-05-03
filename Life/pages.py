@@ -109,9 +109,11 @@ class Liferesults(Page):
     def vars_for_template(self):
         if self.player.round_number not in Constants.start_rounds:
             return {'needed_organ_last_period': self.player.in_round(self.player.round_number-1).need_organ,
+                    'period': int(self.player.round_number - round(self.player.round_number / 20, 0) * 20)
                 }
         else:
             return {'needed_organ_last_period': False,
+                    'period': int(self.player.round_number - round(self.player.round_number/20,0)*20)
                 }
 
 '''
