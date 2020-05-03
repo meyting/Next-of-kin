@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-Ergebnisse: Periode {{ player.round_number }}
+Ergebnisse: Periode {{ player.round_number - round(player.round_number/20,0)*20 }}
 {% endblock %}
 
 {% block content %}
