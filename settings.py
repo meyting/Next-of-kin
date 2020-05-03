@@ -16,10 +16,10 @@ else:
 #    DEBUG = True
 	DEBUG = True # wieder löschen wenn Umgebungsvariable gesetzt					!!!!!!!!!!!!!!!
 
-ADMIN_USERNAME = 'meyting'
+ADMIN_USERNAME = 'meyting_nok'
 # for security, best to set admin password in an environment variable
 # ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-ADMIN_PASSWORD = 'organ' # wieder löschen wenn Umgebungsvariable gesetzt 			!!!!!!!!!!!!!!!
+ADMIN_PASSWORD = 'nok' # wieder löschen wenn Umgebungsvariable gesetzt 			!!!!!!!!!!!!!!!
 
 # To use a database other than sqlite,
 # set the DATABASE_URL environment variable.
@@ -65,18 +65,18 @@ SESSION_CONFIGS = \
     {
         'name': 'Organ_Donation_Game_Opt_Out',
         'display_name': "Next-of-kin o-o",
-        'num_demo_participants': 12,
+        'num_demo_participants': 2,
         'app_sequence': ['Instructions_Nokgame','Life'],
-        'use_browser_bots' : False,
+        'use_browser_bots' : True,
         'treatment': 'opt-out',
         'participation_fee': 5,
     },
     {
         'name': 'Organ_Donation_Game_Active_Choice',
         'display_name': "Next-of-kin a-c",
-        'num_demo_participants': 12,
+        'num_demo_participants': 2,
         'app_sequence': ['Instructions_Nokgame','Life'],
-        'use_browser_bots' : False,
+        'use_browser_bots' : True,
         'treatment': 'active-choice',
         'participation_fee': 5
     },

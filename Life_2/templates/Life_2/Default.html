@@ -26,7 +26,7 @@ Ausgangssituation
 </p>
 <p>
     Wenn Sie keine Entscheidung treffen wollen, klicken Sie bitte auf "Ohne Entscheidung fortfahren".
-    In diesem Fall gelten Sie zunächst weiter als "Organspender/in".
+    In diesem Fall gelten Sie zunächste weiter als "Organspender/in".
     Nach dem Ausfall Ihres A Organs wird dann Ihr/e Partner/in befragt, ob er/sie der Spende Ihrer B Organe zustimmt.
     Sollte das A Organ Ihres/Ihrer Partners/in bereits in einer der vorherigen Perioden ausgefallen sein und er/sie somit keine Entscheidung mehr treffen kann, werden Ihre B Organe gespendet.
 </p>
@@ -45,9 +45,9 @@ Ausgangssituation
     {% endif %}
 <br />
 <br />
-<div>
-    <button  class="left  btn btn-primary btn-large" name="decide" value="False" >Ohne Entscheidung fortfahren</button>
-    <button  class="right  btn btn-primary btn-large" name="decide" value="True" >Zur Organspende-Entscheidung</button>
+<div class="buttons" id="buttons">
+    <button  class="left  btn btn-primary btn-large" name="decide" value="True" >Zur Organspende-Entscheidung</button>
+    <button  class="right btn btn-primary btn-large" name="decide" value="False" >Ohne Entscheidung fortfahren</button>
     {{ form.decide.errors }}
 </div>
 

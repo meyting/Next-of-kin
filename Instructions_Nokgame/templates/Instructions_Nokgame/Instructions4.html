@@ -22,7 +22,11 @@ Das Spiel - Ihre Entscheidung
     Auf der dann folgenden Seite, können Sie Ihren Status von "Organspender" zu "Kein Organspender" ändern.
     Falls Sie dann Ihren Status in "Kein Organspender" ändern, erhalten Sie {{ Constants.registration_cost }} Cent.
     Ihre Entscheidung wird nur für Ihren "Partner" (siehe nächste Seite) sichtbar sein - alle anderen Teilnehmer kennen Ihre Entscheidung nicht.
+    Sie haben aber auch die Möglichkeit, Ihre Entscheidung nicht zu ändern, indem Sie zu Anfang auf den Button "Ohne Entscheidung fortfahren" klicken.
+    In diesem Fall wird Ihnen kein Geld abgezogen und Sie bleiben als "Organspender" eingetragen.
+
 </p>
+
 
 {% endif %}
 {% if treatment == 'active-choice' %}
@@ -34,8 +38,8 @@ Das Spiel - Ihre Entscheidung
     Auf der dann folgenden Seite, können Sie Ihren Status entweder in "Organspender" oder in "Kein Organspender" ändern.
     Falls Sie sich als Organspender registrieren, werden Ihnen weitere {{ Constants.registration_cost }} Cent von Ihrem Ausgangsbudget von {{ Constants.startbudget_active_choice }} Euro abgezogen.
     Ihre Entscheidung wird nur für Ihren "Partner" (siehe nächste Seite) sichtbar sein - alle anderen Teilnehmer kennen Ihre Entscheidung nicht.
-    Sie haben aber auch die Möglichkeit, Ihre Entscheidung offen zu lassen.
-    In diesem Fall wird "Ihr/e Partner/in" (siehe nächste Seite) für Sie entscheiden, nachdem Ihr A Organ ausgefallen ist.
+    Sie haben aber auch die Möglichkeit, Ihre Entscheidung offen zu lassen, indem Sie zu Anfang auf den Button "Ohne Entscheidung fortfahren" klicken.
+    In diesem Fall wird Ihnen kein Geld abgezogen, dafür wird aber "Ihr/e Partner/in" (siehe nächste Seite) für Sie entscheiden, nachdem Ihr A Organ ausgefallen ist.
     Sie können diese Entscheidung dann nicht beobachten.
 </p>
 {% endif %}

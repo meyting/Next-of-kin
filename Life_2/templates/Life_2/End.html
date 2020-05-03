@@ -7,6 +7,13 @@
 
 {% block content %}
     <p>
+    {% if player.is_dead == False %}
+    {% if player.periods_waiting != Constants.num_rounds  %}
+    Sie haben diesen Durchgang komplett überlebt.
+    Dieser Durchgang ist nun beendet beendet.<br /><br />
+    Bitte klicken Sie nun auf "Weiter", um zum nächsten Durchgang zu gelangen.
+    {% endif %}
+
     {% if player.is_dead == True %}
     {% if player.periods_waiting != Constants.num_rounds  %}
     Ihr A Organ ist ausgefallen.

@@ -14,9 +14,9 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'Life'
+    name_in_url = 'Life_2'
     players_per_group = 2
-    num_rounds = 80
+    num_rounds = 20
     a = 0.1
     b = 0.2
     p = 1
@@ -27,10 +27,6 @@ class Constants(BaseConstants):
     thinking_cost = 50
     registration_cost = 50
     nok_yes = 30
-    finish_rounds = [20,40,60,80,]
-    #100,120,140,160,180,200,22,240,260,280,300,320,340,360,380,400]
-    start_rounds = [1,21,41,61,]
-    #81,101,121,141,161,181,201,221,241,261,281,301,321,341,361,381]
 
 class Subsession(BaseSubsession):
     def creating_session(self):
@@ -40,7 +36,7 @@ class Subsession(BaseSubsession):
             self.group_like_round(1)
         print(self.get_group_matrix())
         for p in self.get_players():
-            if self.round_number in Constants.start_rounds:
+            if self.round_number == 1:
                 p.participant.vars['is_dead'] = False
                 if 'treatment' == 'opt-out' in self.session.config:
                     p.is_donor = True
@@ -133,7 +129,7 @@ class Player(BasePlayer):
         if A_failure_prop > 1 - Constants.a and self.is_dead == False:
             self.is_dead = True
             self.participant.vars["is_dead"] = True
-            for player in self.in_rounds(self.round_number+1,round((self.round_number-1)/20,0)*20+20):
+            for player in self.in_rounds(self.round_number+1,Constants.num_rounds):
                 player.is_dead = True
             self.died_of_A = True
             self.need_organ = False
@@ -143,7 +139,7 @@ class Player(BasePlayer):
         if Constants.num_rounds+1 > self.periods_waiting >= Constants.l:
             self.is_dead = True
             self.participant.vars["is_dead"] = True
-            for player in self.in_rounds(self.round_number+1,round((self.round_number-1)/20,0)*20+20):
+            for player in self.in_rounds(self.round_number+1,Constants.num_rounds):
                 player.is_dead = True
             self.died_of_B = True
             self.need_organ = False
@@ -160,7 +156,7 @@ class Player(BasePlayer):
     def count_living_periods(self):
         if self.is_dead == False:
             self.periods_lived += 1
-            for player in self.in_rounds(self.round_number+1,round((self.round_number-1)/20,0)*20+20):
+            for player in self.in_rounds(self.round_number+1,Constants.num_rounds):
                 player.periods_lived += 1
 
     def count_waiting_periods(self):
@@ -188,17 +184,17 @@ class Player(BasePlayer):
         for g in groupmember:
             if self.asked == True:
                 g.is_donor = self.nok_decision
-                for gm in g.in_rounds(self.round_number + 1, round((self.round_number-1)/20,0)*20+20):
+                for gm in g.in_rounds(self.round_number + 1, Constants.num_rounds):
                     gm.is_donor = self.nok_decision
                 g.participant.vars['is_donor'] = self.nok_decision
                 if self.session.config["treatment"] == "opt-out" and self.nok_decision == None:
                     g.is_donor = True
-                    for gm in g.in_rounds(self.round_number + 1, round((self.round_number-1)/20,0)*20+20):
+                    for gm in g.in_rounds(self.round_number + 1, Constants.num_rounds):
                         gm.is_donor = True
                     g.participant.vars['is_donor'] = True
                 if self.session.config["treatment"] == "active-choice" and self.nok_decision == None:
                     g.is_donor = False
-                    for gm in g.in_rounds(self.round_number + 1, round((self.round_number-1)/20,0)*20+20):
+                    for gm in g.in_rounds(self.round_number + 1, Constants.num_rounds):
                         gm.is_donor = False
                     g.participant.vars['is_donor'] = False
 
@@ -206,4 +202,3 @@ class Player(BasePlayer):
         groupmember = self.get_others_in_group()
         other = [g.is_donor for g in groupmember]
         self.other = other[0]
-

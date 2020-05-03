@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-Ergebnisse: Periode {{ player.round_number }}
+Ergebnisse: Periode {{ player.round_number-round(player.round_number/20,0)*20 }}
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,9 @@ Ergebnisse: Periode {{ player.round_number }}
     <br /> <br />
     Bitte klicken Sie nun auf "Weiter" um zur nächsten Periode zu gelangen.
     {% endif %}
-    {% if player.round_number > 1 %}
+
+
+    {% if player.round_number not in Constants.start_rounds %}
     {% if needed_organ_last_period == True %}
     {% if player.need_organ  == False %}
     {% if player.got_organ  == True %}
@@ -27,16 +29,10 @@ Ergebnisse: Periode {{ player.round_number }}
     {% endif %}
     {% endif %}
     {% endif %}
+
+
     {% if player.need_organ  == False %}
     {% if player.got_organ  == False %}
-    Ihr A Organ und Ihre B Organe funktionieren.
-    Sie haben in dieser Periode 1 Euro verdient. <br /> <br />
-
-    Bitte klicken Sie nun auf "Weiter" um zur nächsten Periode zu gelangen.
-    {% endif %}
-    {% endif %}
-    {% if player.need_organ  == False %}
-    {% if player.got_organ  == True %}
     Ihr A Organ und Ihre B Organe funktionieren.
     Sie haben in dieser Periode 1 Euro verdient. <br /> <br />
 
