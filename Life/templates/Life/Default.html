@@ -2,7 +2,12 @@
 {% load otree static %}
 
 {% block title %}
+{% if player.round_number in Constants.start_rounds_for_startpage %}
+Neuer Durchgang: Ausgangssituation
+{% endif %}
+{% if player.round_number == 1 %}
 Ausgangssituation
+{% endif %}
 {% endblock %}
 
 {% block styles %}

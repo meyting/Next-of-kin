@@ -46,7 +46,7 @@ class Individual(WaitPage):
         for p in self.subsession.get_players():
             if p.round_number not in Constants.start_rounds:
                 p.is_dead = p.in_round(p.round_number - 1).is_dead
-                p.is_donor = p.in_round(round((p.round_number-1)/20,0)*20+1).is_donor
+                p.is_donor = p.in_round(math.floor((p.round_number-1)/20)*20+1).is_donor
                 p.need_organ = p.in_round(p.round_number - 1).need_organ
                 p.periods_lived = p.in_round(p.round_number - 1).periods_lived
                 p.periods_waiting = p.in_round(p.round_number - 1).periods_waiting
