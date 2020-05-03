@@ -5,7 +5,6 @@ from otree.api import (
 
 import random
 import math
-import numpy as np
 
 author = 'Your name here'
 
