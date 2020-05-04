@@ -7,23 +7,23 @@ Das Spiel - Ihre Entscheidung
 
 {% block content %}
 <p>
-    Nachdem Ihr A Organ ausgefallen ist, besteht die Möglichkeit, dass Ihre B Organe anderen Teilnehmern der Gruppe gegeben werden.
-    In diesem Fall wird nach dem Ausfall Ihres A Organs jedes Ihrer funktionierenden B Organe an einen anderen Teilnehmer mit ausgefallenen B Organen gehen, falls dieser andere Teilnehmer bis dahin 5 oder weniger Perioden auf ein B Organ gewartet hat.
-    Falls mehr als zwei andere Teilnehmer auf ein B Organ warten, erhält zunächst der Teilnehmer mit der längsten Wartezeit ein B Organ.
-    Bis zu zwei andere Teilnehmer können jeweils eines Ihrer B Organe erhalten.
+    Nachdem Ihr A Organ ausgefallen ist, besteht die Möglichkeit, dass Ihre B Organe anderen Teilnehmer*innen der Gruppe gegeben werden.
+    In diesem Fall wird nach dem Ausfall Ihres A Organs jedes Ihrer funktionierenden B Organe an eine*n anderen Teilnehmer*in mit ausgefallenen B Organen gehen, falls diese*r andere Teilnehmer*in bis dahin 5 oder weniger Perioden auf ein B Organ gewartet hat.
+    Falls mehr als zwei andere Teilnehmer*innen auf ein B Organ warten, erhält zunächst der/die Teilnehmer*in mit der längsten Wartezeit ein B Organ.
+    Bis zu zwei andere Teilnehmer*innen können jeweils eines Ihrer B Organe erhalten.
     Sobald ein B Organ einmal gespendet wurde, kann es nicht erneut gespendet werden.
 </p>
 {% if treatment == 'opt-out' %}
 <p>
-    Zu Beginn jedes Durchgangs werden Sie zunächst als "Organspender" geführt.
+    Zu Beginn jedes Durchgangs werden Sie zunächst als "Organspender*in" geführt.
     Sie können dies aber zu Beginn eines Durchgangs ändern.
     Dazu müssen Sie auf den zu Anfang eingeblendeten Button "Zur Organspende-Entscheidung" klicken.
     Falls Sie auf diesen Button klicken werden Ihnen {{ Constants.thinking_cost }} Cent von Ihrem Ausgangsbudget von {{ Constants.startbudget_opt_out }} Euro abgezogen.
-    Auf der dann folgenden Seite, können Sie Ihren Status von "Organspender" zu "Kein Organspender" ändern.
-    Falls Sie dann Ihren Status in "Kein Organspender" ändern, erhalten Sie {{ Constants.registration_cost }} Cent.
-    Ihre Entscheidung wird nur für Ihren "Partner" (siehe nächste Seite) sichtbar sein - alle anderen Teilnehmer kennen Ihre Entscheidung nicht.
+    Auf der dann folgenden Seite, können Sie Ihren Status von "Organspender*in" zu "Kein*e Organspender*in" ändern.
+    Falls Sie dann Ihren Status in "Kein*e Organspender*in" ändern, erhalten Sie {{ Constants.registration_cost }} Cent.
+    Ihre Entscheidung wird nur für Ihre*n "Partner*in" (siehe nächste Seite) sichtbar sein - alle anderen Teilnehmer*innen kennen Ihre Entscheidung nicht.
     Sie haben aber auch die Möglichkeit, Ihre Entscheidung nicht zu ändern, indem Sie zu Anfang auf den Button "Ohne Entscheidung fortfahren" klicken.
-    In diesem Fall wird Ihnen kein Geld abgezogen und Sie bleiben als "Organspender" eingetragen.
+    In diesem Fall wird Ihnen kein Geld abgezogen und Sie bleiben als "Organspender*in" eingetragen.
 
 </p>
 
