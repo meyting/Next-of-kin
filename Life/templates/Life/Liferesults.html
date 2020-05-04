@@ -8,7 +8,7 @@ Ergebnisse: Periode {{ period }}
 {% block content %}
 <p>
     {% if player.need_organ  == True %}
-    Ihr B Organ funktioniert nicht mehr und sie haben diese Periode kein B Organ eines anderen Teilnehmers bekommen.
+    Ihr B Organ funktioniert nicht mehr und sie haben diese Periode kein B Organ von einem/einer anderen Teilnehmer*in bekommen.
     Sie haben in dieser Periode 0 Euro verdient.
     Sie sind auf der Warteliste für ein B Organ.
     Sie warten seit {{ player.periods_waiting }} {% if player.periods_waiting == 1 %} Periode. {% else %} Perioden. {% endif %}
@@ -20,7 +20,7 @@ Ergebnisse: Periode {{ period }}
     {% if needed_organ_last_period == True %}
     {% if player.need_organ  == False %}
     {% if player.got_organ  == True %}
-    Sie haben ein neues B Organ von einem anderen Teilnehmer erhalten.
+    Sie haben ein neues B Organ von einem/einer anderen Teilnehmer*in erhalten.
     Sie haben in dieser Periode 1 Euro verdient.
     <br /> <br />
     Bitte klicken Sie nun auf "Weiter" um zur nächsten Periode zu gelangen.

@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     gamerounds = 30
     gamerounds_part = int(gamerounds/2)
     number_payout_gamerounds = 4
-    startbudget_opt_out = 1.50
+    startbudget_opt_out = '1,50'
     startbudget_active_choice = 2
     thinking_cost = 50
     registration_cost = 50
